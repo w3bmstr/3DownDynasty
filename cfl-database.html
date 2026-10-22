@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CFL Historical Database</title>
+<style>
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+font:16px/1.5 system-ui,sans-serif;background:#06080c;color:#f4f6f9;
+background-image:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(0,230,118,.08),transparent 55%)}
+.box{max-width:420px;width:90%;padding:2rem 1.5rem;border:1px solid #252c3a;border-radius:16px;
+background:#10141c;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.45)}
+h1{margin:0 0 .5rem;font-size:1.5rem}
+p{color:#8b96a8;margin:0 0 1.25rem;font-size:.95rem}
+a.era{display:block;margin:.5rem 0;padding:.85rem 1rem;border-radius:10px;text-decoration:none;font-weight:700}
+.a{background:linear-gradient(180deg,#00e88a,#00c853);color:#03140a}
+.b{background:#161b26;color:#ffd54f;border:1px solid rgba(255,213,79,.35)}
+.back{margin-top:1.2rem;font-size:.85rem}
+.back a{color:#00e676;font-weight:600;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>CFL Historical Database</h1>
+  <p id="blurb">Searchable stats split for GitHub. Pick an era:</p>
+  <a class="era a" id="link-classic" href="cfl-db-1945-1989.html">1945–1989 · Classic era</a>
+  <a class="era b" id="link-modern" href="cfl-db-1990-2026.html">1990–2026 · Modern era</a>
+  <p class="back"><a href="index.html">← Back to 3 Down Dynasty</a></p>
+</div>
+<script>
+(function () {
+  var h = location.hash || '';
+  if (h.length > 1) {
+    document.getElementById('blurb').textContent = 'Looking up “' + decodeURIComponent(h.slice(1)) + '” — choose an era to search:';
+    document.getElementById('link-classic').href = 'cfl-db-1945-1989.html' + h;
+    document.getElementById('link-modern').href = 'cfl-db-1990-2026.html' + h;
+  }
+})();
+</script>
+</body>
+</html>
