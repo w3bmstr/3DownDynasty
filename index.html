@@ -340,10 +340,10 @@ button:active{transform:scale(.98)}
 .asw{text-align:center;margin-top:.9rem;font-size:.85rem;color:var(--muted)}
 .anote{text-align:center;margin-top:1rem;font-size:.75rem;color:var(--muted)}
 .toast{
-  position:fixed;bottom:1.3rem;left:50%;transform:translateX(-50%);
+  position:fixed;top:calc(env(safe-area-inset-top,0px) + 4.2rem);bottom:auto;left:50%;transform:translateX(-50%);pointer-events:none;
   background:var(--surface-3);border:1px solid var(--border);
   padding:.75rem 1.3rem;border-radius:12px;font-size:.85rem;z-index:300;
-  animation:slideUp .25s;max-width:90%;text-align:center;
+  animation:toastIn .25s;max-width:90%;text-align:center;
   box-shadow:var(--shadow-md);
 }
 
@@ -389,6 +389,8 @@ button:active{transform:scale(.98)}
 .foot-disc{font-size:.75rem;color:var(--muted);opacity:.85;margin-top:.7rem;line-height:1.5}
 
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translate(-50%,0)}}
+.btn-g.hint{border-color:var(--gold);color:var(--gold);box-shadow:0 0 0 2px var(--gold-dim)}
 @keyframes slideUp{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
 @keyframes spinFlash{0%,100%{opacity:.5}50%{opacity:1}}
 @keyframes rowIn{to{opacity:1;transform:translateY(0)}}
@@ -400,6 +402,42 @@ button:active{transform:scale(.98)}
 .h2h-only{display:none}body.h2h .h2h-only{display:inline-block}
 body.h2h #btn-next-pick,body.h2h #btn-wildcard,body.h2h #btn-sim,body.h2h .srm{display:none!important}
 body.hard .prating,body.hard #team-ovr{visibility:hidden}
+/* ---- Draft experience (shortlist, search/sort, tiers, chemistry) ---- */
+#draft-controls{margin:.45rem 0}
+#draft-controls .dc-row{display:flex;gap:.4rem}
+#draft-search{flex:1;min-width:0;padding:.55rem;border:1px solid var(--border);border-radius:7px;background:var(--surface-2);color:var(--text);font:inherit;font-size:.85rem}
+#draft-sort{padding:.5rem;border:1px solid var(--border);border-radius:7px;background:var(--surface-2);color:var(--text);font:inherit;font-size:.8rem;max-width:44%}
+.dc-meta{display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap;margin-top:.3rem;font-size:.7rem;color:var(--muted)}
+#draft-more{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:.7rem 0 .2rem}
+.sl-head{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);padding:.3rem .2rem .45rem;font-weight:700}
+.team-hist-btn{margin:.4rem auto 0;display:block;font-size:.78rem;padding:.35rem .8rem}
+.team-chip{background:none;border:none;border-bottom:1px dotted var(--muted);color:inherit;font:inherit;padding:0;cursor:pointer}
+.team-chip:hover{color:var(--gold);border-bottom-color:var(--gold)}
+.pr{display:flex;flex-direction:column;align-items:flex-end;gap:.15rem;min-width:52px}
+.tier{font-size:.6rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:.08rem .38rem;border-radius:6px;border:1px solid}
+.t-elite{color:var(--gold);border-color:rgba(255,213,79,.55);background:var(--gold-dim)}
+.t-star{color:var(--green);border-color:rgba(0,230,118,.45);background:var(--green-dim)}
+.t-starter{color:#8ab4ff;border-color:rgba(138,180,255,.4);background:rgba(138,180,255,.1)}
+.t-depth{color:var(--muted);border-color:var(--border);background:transparent}
+.ptags{display:flex;flex-wrap:wrap;gap:.25rem;margin:.2rem 0 .1rem}
+.ptag{font-size:.6rem;font-weight:800;letter-spacing:.05em;padding:.08rem .4rem;border-radius:6px;border:1px solid}
+.ptag.best{color:var(--gold);border-color:rgba(255,213,79,.55)}
+.ptag.need{color:var(--green);border-color:rgba(0,230,118,.45)}
+.ptag.sleeper{color:#b388ff;border-color:rgba(179,136,255,.5)}
+.ptag.trap{color:var(--red);border-color:rgba(255,82,82,.5)}
+.pwhy{font-size:.7rem;color:var(--text-2);margin:.1rem 0}
+.pwhy.trap{color:var(--red)}.pwhy.sleeper{color:#b388ff}
+.palso{font-size:.68rem;color:var(--muted);margin-top:.1rem}
+.pchem{display:inline-block;font-size:.65rem;font-weight:700;color:var(--green);margin-top:.15rem}
+.chempill{font-size:.78rem;font-weight:800;color:var(--green);background:var(--green-dim);border:1px solid rgba(0,230,118,.3);border-radius:999px;padding:.2rem .6rem}
+.chem-row{display:flex;justify-content:space-between;font-size:.8rem;margin-top:.45rem;color:var(--muted)}
+.chem-row.on{color:var(--text)}.chem-row strong{color:var(--green)}.chem-row small{color:var(--muted);font-weight:500}
+.chem-tip{font-size:.68rem;color:var(--muted)}
+.pd-career{display:flex;justify-content:space-between;width:100%;gap:.5rem;background:var(--surface-2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:.45rem .6rem;margin:.25rem 0;font:inherit;font-size:.8rem;cursor:pointer;text-align:left}
+.pd-career:hover{border-color:var(--gold)}
+.pd-team{margin:.3rem 0;font-size:.8rem}.pd-team summary{cursor:pointer;color:var(--gold)}.pd-team p{color:var(--muted);margin:.3rem 0 .1rem}
+body.hard .tier,body.hard .ptags,body.hard .pwhy,body.hard #tier-legend{display:none}
+
 
 @media(min-width:560px){
   .modes{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;justify-items:center;justify-content:center}
@@ -433,6 +471,7 @@ body.hard .prating,body.hard #team-ovr{visibility:hidden}
   /* Collapsed by default on mobile so spin + picks stay visible */
   .roster-box.collapsed .slots{display:none}
   .roster-box.collapsed #btn-sim{display:none}
+  .roster-box.collapsed #chemistry-panel{display:none}
   .roster-box.collapsed.ready #btn-sim{display:block;margin-top:.45rem}
   .roster-box.collapsed{padding:.55rem .85rem}
   .roster-toggle{
@@ -655,7 +694,7 @@ body.hard .prating,body.hard #team-ovr{visibility:hidden}
     <h2>How to Play</h2>
     <div style="font-size:.9rem;color:var(--muted);line-height:1.55;text-align:left">
       <p style="margin-bottom:.7rem"><strong style="color:var(--text)">1. Spin</strong> — Each pick reveals a real CFL franchise + decade (e.g. “Saskatchewan Roughriders · 1960s”).</p>
-      <p style="margin-bottom:.7rem"><strong style="color:var(--text)">2. Draft</strong> — Choose a player who actually played for that team in that era. Build a 12-man roster with the required positions (1 QB, 1 RB, 2 WR, 2 OL, 2 DL, 1 LB, 2 DB, 1 K).</p>
+      <p style="margin-bottom:.7rem"><strong style="color:var(--text)">2. Draft</strong> — Choose a player who actually played for that team in that era. Build a 12-man roster with the required positions (1 QB, 1 RB, 2 WR, 2 OL, 2 DL, 1 LB, 2 DB, 1 K). Each spin opens with a shortlist: the best player, a sleeper, a trap (high rated but at a position you have already filled) and the best at every position you still need. Tap “Expand all” to search and sort everyone. Tap a team name for its history.</p>
       <p style="margin-bottom:.7rem"><strong style="color:var(--text)">3. Wildcards</strong> — You get 3. Use one to pick any remaining player. A 20-second play clock starts; run it out and the wildcard is lost (Delay of Game).</p>
       <p style="margin-bottom:.7rem"><strong style="color:var(--text)">4. Simulate</strong> — Play an 18-game regular season. Reach 14+ wins for the playoffs. Win the Dominion Cup. Chase the true 18-0 perfect season.</p>
       <p style="margin-bottom:.7rem"><strong style="color:var(--text)">Modes</strong><br>
@@ -663,7 +702,12 @@ body.hard .prating,body.hard #team-ovr{visibility:hidden}
       • Head-to-Head — draft against the CPU (you get limited redraws)<br>
       • Daily — same seed for everyone that day<br>
       • Hard Mode — ratings hidden</p>
-      <p style="margin-top:.9rem;font-size:.82rem">Tip: Old franchises (Rough Riders, Concordes, 1990s U.S. teams) and modern Elks/Redblacks are all included. Hover or read the spin note for quick history.</p>
+      <p style="margin-bottom:.7rem"><strong style="color:var(--text)">What to expect</strong><br>
+      • A sloppy draft wins about 10–11 games<br>
+      • A solid draft wins about 13 and has a shot at the playoffs<br>
+      • An excellent draft wins 14–15 and contends for the Cup<br>
+      • 18-0 is rare: even a near-perfect draft gets there only about 1 time in 20</p>
+      <p style="margin-top:.9rem;font-size:.82rem">Tip: Old franchises (Rough Riders, Concordes, 1990s U.S. teams) and modern Elks/Redblacks are all included. Tier labels show how rare a rating is: Elite 95+, Star 85–94, Starter 70–84, Depth under 70. Tap any team name for its history.</p>
     </div>
     <button class="btn-l" id="howto-ok" style="margin:1.1rem auto 0;display:block">Got it</button>
   </div>
@@ -760,7 +804,7 @@ const ERAS = ["1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"];
 const TEAMS = ["BC Lions", "Calgary Stampeders", "Edmonton Elks", "Edmonton Eskimos", "Hamilton Tiger-Cats", "Montreal Alouettes", "Ottawa Redblacks", "Saskatchewan Roughriders", "Toronto Argonauts", "Winnipeg Blue Bombers", "Ottawa Rough Riders", "Ottawa Renegades", "Montreal Concordes", "Sacramento Gold Miners", "San Antonio Texans", "Las Vegas Posse", "Shreveport Pirates", "Memphis Mad Dogs", "Birmingham Barracudas", "Baltimore Stallions", "Baltimore CFL Colts"];
 
 // Short educational notes for historical teams
-const TEAM_NOTES = {"Ottawa Rough Riders": "Original Ottawa franchise (1876-1996). Folded after 1996.", "Ottawa Renegades": "Returned 2002-2005, then suspended.", "Ottawa Redblacks": "Current Ottawa team, began 2014.", "Edmonton Eskimos": "Name used until 2020; rebranded Edmonton Elks.", "Edmonton Elks": "Current name (since 2021).", "Montreal Concordes": "Replaced Alouettes 1982-85; folded 1987. Alouettes name revived 1996.", "Baltimore Stallions": "Only U.S. team to win the Dominion Cup (1995). Moved to Montreal 1996.", "Baltimore CFL Colts": "1994 name before becoming Stallions (NFL objection to Colts).", "Sacramento Gold Miners": "First U.S. expansion team (1993-94).", "San Antonio Texans": "Moved from Sacramento for 1995 only.", "Las Vegas Posse": "One-year U.S. expansion team (1994).", "Shreveport Pirates": "U.S. expansion, 1994-95.", "Birmingham Barracudas": "U.S. expansion, 1995 only.", "Memphis Mad Dogs": "U.S. expansion, 1995 only."};
+const TEAM_NOTES = {"BC Lions": "Joined the CFL in 1954 and play in Vancouver. Grey Cup champions in 1964, 1985, 1994, 2000, 2006 and 2011.", "Calgary Stampeders": "Founded in 1945. Eight Grey Cup titles: 1948, 1971, 1992, 1998, 2001, 2008, 2014 and 2018.", "Hamilton Tiger-Cats": "Formed in 1950 when the Hamilton Tigers and Wildcats merged. Grey Cup champions in 1953, 1957, 1963, 1965, 1967, 1972, 1986 and 1999.", "Montreal Alouettes": "Original club played 1946-1981; the modern club began in 1996 after the Baltimore Stallions relocated. Grey Cup champions in 1970, 1974, 1977, 2002, 2009 and 2010.", "Saskatchewan Roughriders": "Founded in 1910 as the Regina Rugby Club; the Roughriders name dates to 1924. Grey Cup titles include 1966, 1989, 2007 and 2013.", "Toronto Argonauts": "Founded in 1873, making them one of the oldest pro sports teams in North America. The league's most Grey Cup titles.", "Winnipeg Blue Bombers": "The Winnipeg Football Club dates to 1930. Grey Cup champions in 1935, 1958, 1959, 1961, 1962, 1984, 1988, 1990, 2019 and 2021.", "Ottawa Rough Riders": "Original Ottawa franchise (1876-1996). Folded after 1996.", "Ottawa Renegades": "Returned 2002-2005, then suspended.", "Ottawa Redblacks": "Current Ottawa team, began 2014.", "Edmonton Eskimos": "Name used until 2020; rebranded Edmonton Elks.", "Edmonton Elks": "Current name (since 2021).", "Montreal Concordes": "Replaced Alouettes 1982-85; folded 1987. Alouettes name revived 1996.", "Baltimore Stallions": "Only U.S. team to win the Dominion Cup (1995). Moved to Montreal 1996.", "Baltimore CFL Colts": "1994 name before becoming Stallions (NFL objection to Colts).", "Sacramento Gold Miners": "First U.S. expansion team (1993-94).", "San Antonio Texans": "Moved from Sacramento for 1995 only.", "Las Vegas Posse": "One-year U.S. expansion team (1994).", "Shreveport Pirates": "U.S. expansion, 1994-95.", "Birmingham Barracudas": "U.S. expansion, 1995 only.", "Memphis Mad Dogs": "U.S. expansion, 1995 only."};
 
 const VALID_PAIRS = [{"team": "BC Lions", "era": "1950s"}, {"team": "BC Lions", "era": "1960s"}, {"team": "BC Lions", "era": "1970s"}, {"team": "BC Lions", "era": "1980s"}, {"team": "BC Lions", "era": "1990s"}, {"team": "BC Lions", "era": "2000s"}, {"team": "BC Lions", "era": "2010s"}, {"team": "BC Lions", "era": "2020s"}, {"team": "Calgary Stampeders", "era": "1950s"}, {"team": "Calgary Stampeders", "era": "1960s"}, {"team": "Calgary Stampeders", "era": "1970s"}, {"team": "Calgary Stampeders", "era": "1980s"}, {"team": "Calgary Stampeders", "era": "1990s"}, {"team": "Calgary Stampeders", "era": "2000s"}, {"team": "Calgary Stampeders", "era": "2010s"}, {"team": "Calgary Stampeders", "era": "2020s"}, {"team": "Edmonton Eskimos", "era": "1950s"}, {"team": "Edmonton Eskimos", "era": "1960s"}, {"team": "Edmonton Eskimos", "era": "1970s"}, {"team": "Edmonton Eskimos", "era": "1980s"}, {"team": "Edmonton Eskimos", "era": "1990s"}, {"team": "Edmonton Eskimos", "era": "2000s"}, {"team": "Edmonton Eskimos", "era": "2010s"}, {"team": "Edmonton Elks", "era": "2020s"}, {"team": "Hamilton Tiger-Cats", "era": "1950s"}, {"team": "Hamilton Tiger-Cats", "era": "1960s"}, {"team": "Hamilton Tiger-Cats", "era": "1970s"}, {"team": "Hamilton Tiger-Cats", "era": "1980s"}, {"team": "Hamilton Tiger-Cats", "era": "1990s"}, {"team": "Hamilton Tiger-Cats", "era": "2000s"}, {"team": "Hamilton Tiger-Cats", "era": "2010s"}, {"team": "Hamilton Tiger-Cats", "era": "2020s"}, {"team": "Montreal Alouettes", "era": "1950s"}, {"team": "Montreal Alouettes", "era": "1960s"}, {"team": "Montreal Alouettes", "era": "1970s"}, {"team": "Montreal Alouettes", "era": "1980s"}, {"team": "Montreal Alouettes", "era": "1990s"}, {"team": "Montreal Alouettes", "era": "2000s"}, {"team": "Montreal Alouettes", "era": "2010s"}, {"team": "Montreal Alouettes", "era": "2020s"}, {"team": "Montreal Concordes", "era": "1980s"}, {"team": "Ottawa Rough Riders", "era": "1950s"}, {"team": "Ottawa Rough Riders", "era": "1960s"}, {"team": "Ottawa Rough Riders", "era": "1970s"}, {"team": "Ottawa Rough Riders", "era": "1980s"}, {"team": "Ottawa Rough Riders", "era": "1990s"}, {"team": "Ottawa Renegades", "era": "2000s"}, {"team": "Ottawa Redblacks", "era": "2010s"}, {"team": "Ottawa Redblacks", "era": "2020s"}, {"team": "Saskatchewan Roughriders", "era": "1950s"}, {"team": "Saskatchewan Roughriders", "era": "1960s"}, {"team": "Saskatchewan Roughriders", "era": "1970s"}, {"team": "Saskatchewan Roughriders", "era": "1980s"}, {"team": "Saskatchewan Roughriders", "era": "1990s"}, {"team": "Saskatchewan Roughriders", "era": "2000s"}, {"team": "Saskatchewan Roughriders", "era": "2010s"}, {"team": "Saskatchewan Roughriders", "era": "2020s"}, {"team": "Toronto Argonauts", "era": "1950s"}, {"team": "Toronto Argonauts", "era": "1960s"}, {"team": "Toronto Argonauts", "era": "1970s"}, {"team": "Toronto Argonauts", "era": "1980s"}, {"team": "Toronto Argonauts", "era": "1990s"}, {"team": "Toronto Argonauts", "era": "2000s"}, {"team": "Toronto Argonauts", "era": "2010s"}, {"team": "Toronto Argonauts", "era": "2020s"}, {"team": "Winnipeg Blue Bombers", "era": "1950s"}, {"team": "Winnipeg Blue Bombers", "era": "1960s"}, {"team": "Winnipeg Blue Bombers", "era": "1970s"}, {"team": "Winnipeg Blue Bombers", "era": "1980s"}, {"team": "Winnipeg Blue Bombers", "era": "1990s"}, {"team": "Winnipeg Blue Bombers", "era": "2000s"}, {"team": "Winnipeg Blue Bombers", "era": "2010s"}, {"team": "Winnipeg Blue Bombers", "era": "2020s"}, {"team": "Sacramento Gold Miners", "era": "1990s"}, {"team": "San Antonio Texans", "era": "1990s"}, {"team": "Las Vegas Posse", "era": "1990s"}, {"team": "Shreveport Pirates", "era": "1990s"}, {"team": "Memphis Mad Dogs", "era": "1990s"}, {"team": "Birmingham Barracudas", "era": "1990s"}, {"team": "Baltimore Stallions", "era": "1990s"}, {"team": "Baltimore CFL Colts", "era": "1990s"}];
 const BAD_IDS=new Set();
@@ -777,7 +821,14 @@ function hasLineupCoverage(pair){
   return Object.entries(LINEUP_REQUIREMENTS).every(([pos,needed])=>counts[pos]>=needed);
 }
 const LIVE_PAIRS=VALID_PAIRS.filter(hasLineupCoverage);
-const BASE=90; // tuned easier: solid drafts ~14-16 wins; elite can chase 18-0 more often (~4-7%)
+const BASE=86;      // average opponent strength for regular-season games
+const POFF_SEMI=6, POFF_FINAL=9; // playoff opponents are stronger than regular-season ones
+const SIM_SCALE=7;  // logistic scale: smaller = ratings matter more, larger = more upsets
+// Measured season results by team OVR (before chemistry/season-approach bonuses):
+//   OVR 80 ~5 wins | 85 ~8 | 90 ~11 | 95 ~14 | 99 ~15, with 18-0 ~5% at 99.
+// Realistic drafts: sloppy ~10-11 wins, solid ~13, excellent 14-15; flawless drafting
+// reaches 18-0 about 5% of the time. Re-measure if BASE, SIM_SCALE or POFF_* change.
+// See the "What to expect" note in How to Play for the player-facing version of these numbers.
 let roster=[], wildcards=3, currentFilter="ALL", spunTeam="", spunEra="", isWildcard=false, isSpinning=false, wildcardQuery="";
 let seasonTok=0, currentUser=null, isCreateMode=false, lastResult="";
 let lastRun=null; // {w,l,pf,pa,cup,perfect,roster,mode,daily,date} for share card + daily LB
@@ -1010,11 +1061,25 @@ function bind(){
   }
 
   // First-visit tip
-  if(!localStorage.getItem("cfl18_seen_howto")){
-    setTimeout(()=>{openHow();localStorage.setItem("cfl18_seen_howto","1")},600);
-  }
+  // Non-blocking: highlight the How to Play button once instead of covering the screen.
+  try{
+    const hb=document.getElementById("btn-howto");
+    if(hb&&!localStorage.getItem("cfl18_seen_howto")){
+      hb.classList.add("hint");
+      hb.addEventListener("click",()=>{hb.classList.remove("hint");try{localStorage.setItem("cfl18_seen_howto","1")}catch(e){}},{once:true});
+    }
+  }catch(e){}
 }
 
+// Spin helper: every decade gets an equal share of spins regardless of how many
+// franchises it has (the 1990s have far more pairs). Every pair stays live.
+function pickPairWeighted(L,rnd){
+  const eras=[...new Set(L.map(v=>v.era))];
+  const r=(rnd||Math.random)()*eras.length;          // one draw: integer part = decade, fraction = franchise
+  const ei=Math.min(eras.length-1,Math.floor(r));
+  const inEra=L.filter(v=>v.era===eras[ei]);
+  return inEra[Math.min(inEra.length-1,Math.floor((r-ei)*inEra.length))];
+}
 function doSpin(){
   if(isSpinning||roster.length>=12||spunTeam||isWildcard)return;
   isSpinning=true;
@@ -1030,13 +1095,13 @@ function doSpin(){
     showToast("No eligible challenge picks remain");
     return;
   }
-  const pair=L[Math.floor(Math.random()*L.length)];
+  const pair=pickPairWeighted(L,Math.random);
   reel(pair,()=>{
     spunTeam=pair.team;spunEra=pair.era;
     el.textContent=spunTeam+" · "+spunEra;note.textContent=TEAM_NOTES[spunTeam]||"";
     isSpinning=false;document.getElementById("btn-next-pick").disabled=true;document.getElementById("btn-wildcard").disabled=wildcards<=0;
     if(currentFilter!=="ALL"&&!PL.some(p=>p.pos===currentFilter&&matches(p)&&!isTaken(p))){currentFilter="ALL";document.querySelectorAll(".fbtn").forEach(x=>x.classList.toggle("active",x.dataset.pos==="ALL"))}
-    renderPlayers();saveDraft();showToast("Pick a player that fits (or Wildcard)");
+    renderPlayers();saveDraft();
   });
 }
 
@@ -1085,28 +1150,7 @@ function useWildcard(){
   renderPlayers(); saveDraft(); showToast("Wildcard active — 20-second play clock!"); pcStart();
 }
 
-function ensureWildcardControls(){
-  const list=document.getElementById("players-list");
-  if(!list)return;
-  let controls=document.getElementById("wildcard-controls");
-  if(!isWildcard){
-    if(controls)controls.remove();
-    return;
-  }
-  if(!controls){
-    controls=document.createElement("div");
-    controls.id="wildcard-controls";
-    controls.style.cssText="display:flex;gap:.4rem;align-items:center;margin:.45rem 0";
-    controls.innerHTML='<input id="wildcard-search" type="search" placeholder="Search wildcard players" aria-label="Search wildcard players" style="flex:1;padding:.55rem;border:1px solid var(--border);border-radius:7px;background:var(--surface-2);color:var(--text)"><span id="wildcard-count" style="font-size:.75rem;color:var(--muted)"></span>';
-    list.parentNode.insertBefore(controls,list);
-    controls.querySelector("#wildcard-search").addEventListener("input",e=>{
-      wildcardQuery=e.target.value.trim().toLowerCase();
-      renderPlayers();
-    });
-  }
-  const input=controls.querySelector("#wildcard-search");
-  if(input&&input.value!==wildcardQuery)input.value=wildcardQuery;
-}
+function ensureWildcardControls(){ensureDraftControls()} // kept for compatibility
 
 
 // ---- CFL-style 20-second play clock for wildcard picks. Run out the clock and it's DELAY OF GAME: the wildcard is lost. ----
@@ -1137,45 +1181,257 @@ function matches(p){
   return p.era===spunEra && p.teams && p.teams.includes(spunTeam);
 }
 
-function renderPlayers(){
-  ensureWildcardControls();
-  let list=PL.filter(p=>!isTaken(p));
-  if(currentFilter!=="ALL")list=list.filter(p=>p.pos===currentFilter);
-  if(isWildcard&&wildcardQuery)list=list.filter(p=>`${p.name} ${p.pos} ${(p.teams||[]).join(" ")} ${p.era}`.toLowerCase().includes(wildcardQuery));
-  list.sort((a,b)=>{
-    const as=(a.era===spunEra&&a.teams&&a.teams.includes(spunTeam)?4:0)+a.ovr/100;
-    const bs=(b.era===spunEra&&b.teams&&b.teams.includes(spunTeam)?4:0)+b.ovr/100;
-    return bs-as;
+// ======================= Draft experience helpers =======================
+// Tiers, career lookup, chemistry model, shortlist, search/sort, team history.
+const POS_ORDER={QB:0,RB:1,WR:2,OL:3,DL:4,LB:5,DB:6,K:7};
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+// Tier bands from the actual rating spread: Elite is the top ~5%, Star the next ~19%.
+function tierOf(o){return o>=95?{k:"elite",t:"Elite"}:o>=85?{k:"star",t:"Star"}:o>=70?{k:"starter",t:"Starter"}:{k:"depth",t:"Depth"}}
+let _ni=null,_niN=-1;
+function nameEntries(name){
+  if(!_ni||_niN!==PL.length){_ni=new Map();PL.forEach(p=>{const k=key(p.name);let a=_ni.get(k);if(!a){a=[];_ni.set(k,a)}a.push(p)});_niN=PL.length}
+  return _ni.get(key(name))||[];
+}
+function teamAbbr(t){return(typeof TC!=="undefined"&&TC[t]&&TC[t][2])||String(t).slice(0,3).toUpperCase()}
+// Every other team + decade this player appears with in the game.
+function careerBits(p,shownTeam){
+  const seen=new Set([shownTeam+"|"+p.era]),bits=[];
+  const push=(t,e)=>{const k=t+"|"+e;if(seen.has(k))return;seen.add(k);bits.push({t,e})};
+  (p.teams||[]).forEach(t=>push(t,p.era));
+  nameEntries(p.name).forEach(q=>{if(q.id===p.id)return;(q.teams||[]).forEach(t=>push(t,q.era))});
+  bits.sort((a,b)=>a.e.localeCompare(b.e));
+  return bits;
+}
+
+// ---- Chemistry: same era, same franchise, teammates, position units (max 8) ----
+const CHEM_UNITS=[["QB","WR","Passing game"],["QB","RB","Backfield"],["OL","OL","Offensive line"],["DL","LB","Front seven"],["DB","DB","Secondary"]];
+function franchiseKey(t){return t==="Edmonton Eskimos"?"Edmonton Elks":t}
+function chemistryBreakdown(list){
+  const r={era:0,franchise:0,teammates:0,units:0,score:0,eraTop:"",eraCount:0,franchiseTop:"",franchiseCount:0,pairs:0,unitsHit:[],label:"No chemistry yet"};
+  if(!list||!list.length)return r;
+  const ec={};list.forEach(p=>{ec[p.era]=(ec[p.era]||0)+1});
+  for(const e in ec)if(ec[e]>r.eraCount){r.eraCount=ec[e];r.eraTop=e}
+  r.era=Math.min(2.5,Math.max(0,r.eraCount-1)*.5);
+  const fc={};list.forEach(p=>new Set((p.teams||[]).map(franchiseKey)).forEach(t=>{fc[t]=(fc[t]||0)+1}));
+  for(const t in fc)if(fc[t]>r.franchiseCount){r.franchiseCount=fc[t];r.franchiseTop=t}
+  r.franchise=Math.min(2,Math.max(0,r.franchiseCount-1)*.5);
+  for(let i=0;i<list.length;i++)for(let j=i+1;j<list.length;j++){
+    const a=list[i],b=list[j];if(a.era!==b.era)continue;
+    const fa=new Set((a.teams||[]).map(franchiseKey));
+    if((b.teams||[]).some(t=>fa.has(franchiseKey(t))))r.pairs++;
+  }
+  r.teammates=Math.min(1.5,r.pairs*.5);
+  CHEM_UNITS.forEach(([x,y,name])=>{
+    let hit=false;
+    for(let i=0;i<list.length&&!hit;i++){
+      if(list[i].pos!==x)continue;
+      for(let j=0;j<list.length;j++){if(j!==i&&list[j].pos===y&&list[j].era===list[i].era){hit=true;break}}
+    }
+    if(hit)r.unitsHit.push(name);
   });
-  const strictPairMatch=p=>p.era===spunEra&&Array.isArray(p.teams)&&p.teams.includes(spunTeam);
-  const show=isWildcard
-    ? list.slice(0,60)
-    : (spunTeam&&spunEra?list.filter(p=>strictPairMatch(p)&&matches(p)):[]);
-  const count=document.getElementById("wildcard-count");
-  if(count)count.textContent=`${show.length}${list.length>show.length?` of ${list.length}`:""} shown`;
-  const waiting=!isWildcard&&!spunTeam;
-  document.getElementById("players-list").innerHTML=show.length?show.map(p=>{
-    const match=strictPairMatch(p);
-    return `<div class="pcard ${match?"match":""}" data-id="${p.id}" role="button" tabindex="0">
-      <div class="ppos">${p.pos}</div>
-      <div class="pinfo"><div class="pname">${p.name}</div><div class="pmeta">${(p.teams.includes(spunTeam)&&!isWildcard?spunTeam:p.teams[0])} · ${p.era}</div></div>
-      <button class="pinfo-btn" data-info="${p.id}" title="Player info" aria-label="Player details" style="background:none;border:none;color:var(--muted);font-size:1rem;padding:.2rem .35rem;cursor:pointer;border-radius:6px">ⓘ</button>
-      <div class="prating">${p.ovr}</div>
-    </div>`;
-  }).join(""):`<div style="padding:1.5rem;text-align:center;color:var(--muted)">${waiting?(isSpinning?"Spinning...":"Spin to reveal the players you can pick from."):"No players left for this Team + Era at this position. Try another position filter or use a Wildcard."}</div>`;
-  document.querySelectorAll(".pcard").forEach(c=>{
-    c.onclick=e=>{if(e.target.closest&&e.target.closest(".pinfo-btn"))return;pick(Number(c.dataset.id))};
-    c.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick(Number(c.dataset.id))}};
-    // long-press for details
+  r.units=Math.min(2,r.unitsHit.length*.4);
+  r.score=Math.min(8,r.era+r.franchise+r.teammates+r.units);
+  r.label=r.score>=6?"Excellent":r.score>=3.5?"Strong":r.score>=1.5?"Developing":"Low";
+  return r;
+}
+// What drafting p would add to chemistry right now, and which part grows most.
+function chemDeltaInfo(p,base){
+  const b=base||chemistryBreakdown(roster),n=chemistryBreakdown(roster.concat([p]));
+  const parts=[["era","same era",n.era-b.era],["franchise","same franchise",n.franchise-b.franchise],["teammates","teammates",n.teammates-b.teammates],["units","position unit",n.units-b.units]];
+  parts.sort((x,y)=>y[2]-x[2]);
+  return{delta:n.score-b.score,short:parts[0][1],why:"Adds chemistry: "+parts.filter(x=>x[2]>0.001).map(x=>x[1]+" +"+x[2].toFixed(1)).join(", ")};
+}
+function chemLines(c){
+  const row=(label,val,max,tip)=>`<div class="chem-row${val>0?" on":""}"><span>${label}</span><strong>+${val.toFixed(1)}<small>/${max}</small></strong></div><div class="chem-tip">${tip}</div>`;
+  return row("Same era",c.era,2.5,c.eraCount>1?`${c.eraCount} players from the ${esc(c.eraTop)}`:"Draft more players from one decade")
+    +row("Same franchise",c.franchise,2,c.franchiseCount>1?`${c.franchiseCount} players tied to ${esc(c.franchiseTop)}`:"Draft more players who wore one team's colours")
+    +row("Teammates",c.teammates,1.5,c.pairs?`${c.pairs} pair${c.pairs>1?"s":""} who shared a franchise and decade`:"Pair up players from the same team and decade")
+    +row("Position units",c.units,2,c.unitsHit.length?esc(c.unitsHit.join(", ")):"QB+WR, QB+RB, OL+OL, DL+LB, DB+DB from the same decade");
+}
+
+// ---- Draft list state ----
+let draftExpanded=false,draftSort="rating-desc",draftShown=120,lastDraftKey="",_draftWired=false;
+function openNeeds(){return NEEDS.filter(n=>roster.filter(p=>p.pos===n.pos).length<n.c).map(n=>n.pos)}
+function fullPositions(){return NEEDS.filter(n=>roster.filter(p=>p.pos===n.pos).length>=n.c).map(n=>n.pos)}
+
+function ensureDraftControls(){
+  const list=document.getElementById("players-list");if(!list)return;
+  let c=document.getElementById("draft-controls");
+  if(!c){
+    c=document.createElement("div");c.id="draft-controls";
+    c.innerHTML=`<div class="dc-row"><input id="draft-search" type="search" placeholder="Search players…" aria-label="Search players" autocomplete="off"><select id="draft-sort" aria-label="Sort players"></select></div><div class="dc-meta"><span id="draft-count"></span><span id="tier-legend">Elite 95+ · Star 85–94 · Starter 70–84 · Depth &lt;70</span></div>`;
+    list.parentNode.insertBefore(c,list);
+    c.querySelector("#draft-search").addEventListener("input",e=>{wildcardQuery=e.target.value.trim().toLowerCase();draftShown=120;renderPlayers()});
+    c.querySelector("#draft-sort").addEventListener("change",e=>{draftSort=e.target.value;draftShown=120;renderPlayers()});
+    const more=document.createElement("div");more.id="draft-more";list.after(more);
+  }
+  if(!_draftWired){
+    _draftWired=true;
     let lt=null;
-    c.addEventListener("pointerdown",e=>{if(e.target.closest&&e.target.closest(".pinfo-btn"))return;lt=setTimeout(()=>showPlayerDetail(Number(c.dataset.id)),480)});
-    c.addEventListener("pointerup",()=>clearTimeout(lt));
-    c.addEventListener("pointerleave",()=>clearTimeout(lt));
-    c.addEventListener("pointercancel",()=>clearTimeout(lt));
+    list.addEventListener("click",e=>{
+      const chip=e.target.closest(".team-chip");if(chip){e.stopPropagation();showTeamHistory(chip.dataset.team);return}
+      const ib=e.target.closest(".pinfo-btn");if(ib){e.stopPropagation();showPlayerDetail(Number(ib.dataset.info));return}
+      const card=e.target.closest(".pcard");if(card)pick(Number(card.dataset.id));
+    });
+    list.addEventListener("keydown",e=>{
+      if(e.key!=="Enter"&&e.key!==" ")return;
+      const card=e.target.classList&&e.target.classList.contains("pcard")?e.target:null;
+      if(card){e.preventDefault();pick(Number(card.dataset.id))}
+    });
+    list.addEventListener("pointerdown",e=>{ // long-press still opens details
+      if(e.target.closest(".pinfo-btn,.team-chip"))return;
+      const card=e.target.closest(".pcard");if(!card)return;
+      lt=setTimeout(()=>showPlayerDetail(Number(card.dataset.id)),480);
+    });
+    ["pointerup","pointerleave","pointercancel"].forEach(ev=>list.addEventListener(ev,()=>clearTimeout(lt)));
+    const pd=document.getElementById("player-detail");
+    if(pd)pd.addEventListener("click",e=>{const b=e.target.closest(".pd-career,.pd-teambtn");if(b)showTeamHistory(b.dataset.team)});
+  }
+  const hardOn=document.body.classList.contains("hard"),sel=c.querySelector("#draft-sort");
+  const opts=hardOn?[["name","Name A–Z"]]:[["rating-desc","Rating: high to low"],["rating-asc","Rating: low to high"],["name","Name A–Z"],["pos","Position"]];
+  const sig=opts.map(o=>o[0]).join();
+  if(sel.dataset.sig!==sig){sel.innerHTML=opts.map(o=>`<option value="${o[0]}">${o[1]}</option>`).join("");sel.dataset.sig=sig}
+  if(!opts.some(o=>o[0]===draftSort))draftSort=opts[0][0];
+  sel.value=draftSort;
+  const inp=c.querySelector("#draft-search");if(inp.value!==wildcardQuery)inp.value=wildcardQuery;
+  const bar=document.querySelector(".spin-bar");let tb=document.getElementById("btn-team-history");
+  if(bar&&!tb){
+    tb=document.createElement("button");tb.id="btn-team-history";tb.type="button";tb.className="btn-g team-hist-btn hidden";
+    const note=document.getElementById("spin-note");if(note)note.after(tb);else bar.appendChild(tb);
+    tb.addEventListener("click",()=>{if(spunTeam)showTeamHistory(spunTeam)});
+  }
+  if(tb){tb.classList.toggle("hidden",!spunTeam);if(spunTeam)tb.textContent="ⓘ "+spunTeam+" history"}
+}
+
+function sortDraftList(list,mode){
+  const byName=(a,b)=>a.name.localeCompare(b.name);
+  const arr=list.slice();
+  if(mode==="name")return arr.sort(byName);
+  if(mode==="pos")return arr.sort((a,b)=>(POS_ORDER[a.pos]-POS_ORDER[b.pos])||(b.ovr-a.ovr)||byName(a,b));
+  if(mode==="rating-asc")return arr.sort((a,b)=>(a.ovr-b.ovr)||byName(a,b));
+  return arr.sort((a,b)=>(b.ovr-a.ovr)||byName(a,b));
+}
+
+// Curated shortlist: best overall, a sleeper, a trap, and the best at every open need.
+function buildShortlist(pool){
+  const byOvr=(a,b)=>(b.ovr-a.ovr)||a.name.localeCompare(b.name);
+  const open=openNeeds(),openSet=new Set(open),full=new Set(fullPositions());
+  const baseChem=chemistryBreakdown(roster);
+  const tags=new Map(),order=[],why={};
+  const prio={sleeper:4,trap:3,best:2,need:1};
+  const add=(p,k,t,w)=>{if(!p)return;if(!tags.has(p.id)){tags.set(p.id,[]);order.push(p)}tags.get(p.id).push({k,t});if(w&&(!why[p.id]||prio[k]>prio[why[p.id].k]))why[p.id]={k,w}};
+  const ranked=pool.slice().sort(byOvr);
+  const best=ranked[0];
+  if(best)add(best,"best","BEST","Highest rated available");
+  // sleeper: close behind the top player at an open position, with the best chemistry fit
+  let sleeper=null,sc=-1e9,sTop=null,sInfo=null;
+  open.forEach(pos=>{
+    const c=ranked.filter(p=>p.pos===pos);if(c.length<2)return;
+    const top=c[0];
+    c.slice(1,9).forEach(p=>{
+      if(top.ovr-p.ovr>8||p.id===(best&&best.id))return;
+      const info=chemDeltaInfo(p,baseChem),score=info.delta*5+p.ovr;
+      if(score>sc){sc=score;sleeper=p;sTop=top;sInfo=info}
+    });
   });
-  document.querySelectorAll(".pinfo-btn").forEach(b=>{
-    b.onclick=e=>{e.stopPropagation();showPlayerDetail(Number(b.dataset.info))};
+  if(sleeper)add(sleeper,"sleeper","SLEEPER",(sTop.ovr===sleeper.ovr?`Level with the top ${sleeper.pos}`:`Only ${sTop.ovr-sleeper.ovr} behind the top ${sleeper.pos}`)+(sInfo.delta>=.1?` · +${sInfo.delta.toFixed(1)} chemistry`:" · easy to overlook"));
+  // trap: highest rated player at a position you've already filled
+  if(roster.length){
+    const trap=ranked.find(p=>full.has(p.pos)&&!(sleeper&&p.id===sleeper.id));
+    if(trap)add(trap,"trap","TRAP",`${trap.pos} is already filled — no lineup slot for him`);
+  }
+  NEEDS.forEach(n=>{
+    if(!openSet.has(n.pos))return;
+    const top=ranked.find(p=>p.pos===n.pos);
+    if(top)add(top,"need","NEED "+n.pos,`Top available ${n.pos}`);
   });
+  return{list:order,tags,why};
+}
+
+function renderPlayers(){
+  const hardOn=document.body.classList.contains("hard");
+  const dk=[spunTeam,spunEra,isWildcard,roster.length].join("|");
+  if(dk!==lastDraftKey){lastDraftKey=dk;draftExpanded=false;draftShown=120;wildcardQuery=""}
+  ensureDraftControls();
+  const strict=p=>p.era===spunEra&&Array.isArray(p.teams)&&p.teams.includes(spunTeam);
+  let eligible;
+  if(isWildcard)eligible=PL.filter(p=>!isTaken(p));
+  else if(spunTeam&&spunEra)eligible=PL.filter(p=>strict(p)&&!isTaken(p)&&matches(p));
+  else eligible=[];
+  let list=eligible;
+  if(currentFilter!=="ALL")list=list.filter(p=>p.pos===currentFilter);
+  if(wildcardQuery){
+    const toks=wildcardQuery.split(/\s+/).filter(Boolean);
+    list=list.filter(p=>{const h=`${p.name} ${p.pos} ${(p.teams||[]).join(" ")} ${p.era}`.toLowerCase();return toks.every(t=>h.includes(t))});
+  }
+  const waiting=!isWildcard&&!spunTeam;
+  const listEl=document.getElementById("players-list"),moreEl=document.getElementById("draft-more"),countEl=document.getElementById("draft-count");
+  const useShortlist=!isWildcard&&spunTeam&&!hardOn&&currentFilter==="ALL"&&!wildcardQuery&&!draftExpanded&&eligible.length>0;
+  const baseChem=chemistryBreakdown(roster);
+  const tierHtml=p=>{const t=tierOf(p.ovr);return`<div class="tier t-${t.k}">${t.t}</div>`};
+  const cardHTML=(p,ex)=>{
+    const t=(!isWildcard&&(p.teams||[]).includes(spunTeam))?spunTeam:p.teams[0];
+    const bits=careerBits(p,t);
+    const also=bits.length?`<div class="palso">Also: ${bits.slice(0,3).map(b=>esc(teamAbbr(b.t))+" "+b.e).join(" · ")}${bits.length>3?` +${bits.length-3} more`:""}</div>`:"";
+    const d=chemDeltaInfo(p,baseChem);
+    const chem=d.delta>=.1?`<div class="pchemrow"><span class="pchem" title="${esc(d.why)}">+${d.delta.toFixed(1)} chem · ${esc(d.short)}</span></div>`:"";
+    const tags=ex?`<div class="ptags">${ex.tags.map(g=>`<span class="ptag ${g.k}">${esc(g.t)}</span>`).join("")}</div>`:"";
+    const why=ex&&ex.why?`<div class="pwhy ${ex.why.k}">${esc(ex.why.w)}</div>`:"";
+    return `<div class="pcard ${strict(p)&&!isWildcard?"match":""}" data-id="${p.id}" role="button" tabindex="0">
+      <div class="ppos">${p.pos}</div>
+      <div class="pinfo"><div class="pname">${esc(p.name)}</div><div class="pmeta"><button type="button" class="team-chip" data-team="${esc(t)}" aria-label="${esc(t)} team history">${esc(t)}</button> · ${p.era}</div>${tags}${why}${also}${chem}</div>
+      <button class="pinfo-btn" data-info="${p.id}" title="Player info" aria-label="Player details" style="background:none;border:none;color:var(--muted);font-size:1rem;padding:.2rem .35rem;cursor:pointer;border-radius:6px">ⓘ</button>
+      <div class="pr"><div class="prating">${p.ovr}</div>${tierHtml(p)}</div>
+    </div>`;
+  };
+  let html="",moreHtml="";
+  if(useShortlist){
+    const sl=buildShortlist(eligible);
+    html=`<div class="sl-head">Shortlist · ${sl.list.length} of ${eligible.length} available</div>`+sl.list.map(p=>cardHTML(p,{tags:sl.tags.get(p.id),why:sl.why[p.id]})).join("");
+    countEl.textContent=`Shortlist: ${sl.list.length} of ${eligible.length}`;
+    moreHtml=`<button type="button" class="btn-g" id="btn-expand-all">Expand all ${eligible.length} players</button>`;
+  }else if(list.length){
+    const sorted=sortDraftList(list,draftSort);
+    const shown=sorted.slice(0,draftShown);
+    html=shown.map(p=>cardHTML(p,null)).join("");
+    const left=sorted.length-shown.length;
+    countEl.textContent=`Showing ${shown.length} of ${sorted.length}`+(isWildcard&&!wildcardQuery?" — search to narrow":"");
+    if(left>0){
+      moreHtml+=`<button type="button" class="btn-g" id="btn-show-more">Show ${Math.min(150,left)} more (${left} left)</button>`;
+      if(left<=600)moreHtml+=`<button type="button" class="btn-g" id="btn-show-all">Show all</button>`;
+    }
+    if(!isWildcard&&!hardOn&&spunTeam&&(draftExpanded||currentFilter!=="ALL"||wildcardQuery))moreHtml+=`<button type="button" class="btn-g" id="btn-back-shortlist">← Back to shortlist</button>`;
+  }else{
+    countEl.textContent=waiting?"":"0 players";
+    html=`<div style="padding:1.5rem;text-align:center;color:var(--muted)">${waiting?(isSpinning?"Spinning...":"Spin to reveal the players you can pick from."):(wildcardQuery?"No players match your search.":"No players left for this Team + Era at this position. Try another position filter or use a Wildcard.")}</div>`;
+    if(!isWildcard&&!hardOn&&spunTeam&&(currentFilter!=="ALL"||wildcardQuery))moreHtml=`<button type="button" class="btn-g" id="btn-back-shortlist">← Back to shortlist</button>`;
+  }
+  listEl.innerHTML=html;
+  moreEl.innerHTML=moreHtml;
+  const q=id=>document.getElementById(id);
+  if(q("btn-expand-all"))q("btn-expand-all").onclick=()=>{draftExpanded=true;draftShown=120;renderPlayers()};
+  if(q("btn-show-more"))q("btn-show-more").onclick=()=>{draftShown+=150;renderPlayers()};
+  if(q("btn-show-all"))q("btn-show-all").onclick=()=>{draftShown=1e9;renderPlayers()};
+  if(q("btn-back-shortlist"))q("btn-back-shortlist").onclick=()=>{
+    draftExpanded=false;wildcardQuery="";currentFilter="ALL";
+    document.querySelectorAll(".fbtn").forEach(x=>x.classList.toggle("active",x.dataset.pos==="ALL"));
+    renderPlayers();
+  };
+}
+
+function showTeamHistory(team){
+  sfxClick();
+  const hardOn=document.body.classList.contains("hard");
+  const eras=[...new Set(VALID_PAIRS.filter(v=>v.team===team).map(v=>v.era))].sort();
+  const top=PL.filter(p=>(p.teams||[]).includes(team)).sort((a,b)=>b.ovr-a.ovr).slice(0,5);
+  const note=TEAM_NOTES[team]||"";
+  const html=`<div class="pd-head">${typeof crest==="function"?crest(team,42):""}<div><div class="pd-name">${esc(team)}</div><div class="pd-meta">Team history</div></div></div>
+    ${note?`<div class="pd-note" style="margin-top:.4rem">${esc(note)}</div>`:`<div class="pd-note" style="margin-top:.4rem">No history note for this franchise yet.</div>`}
+    <div class="pd-row"><span class="pd-label">Decades in the game</span><span class="pd-val">${eras.length?eras.join(" · "):"—"}</span></div>
+    <div class="pd-label" style="margin:.7rem 0 .3rem">Top players in the game</div>
+    ${top.map(p=>`<div class="pd-row"><span class="pd-label">${esc(p.name)} <small>${p.pos} · ${p.era}</small></span><span class="pd-val">${hardOn?"":p.ovr}</span></div>`).join("")}`;
+  document.getElementById("player-detail").innerHTML=html;
+  document.getElementById("player-modal").classList.remove("hidden");
 }
 
 function pick(id){
@@ -1293,19 +1549,23 @@ function saveBest(w,cup){
 }
 
 function sim(teamOvr,base){
-  // Stronger teams win more, but variance keeps 18-0 rare and upsets real.
-  const opp=base+(Math.random()*6-1);           // ~base-1 to base+5
-  const home=Math.random()>.45?2.5:0;           // home bump slightly stronger
-  const form=(Math.random()-.5)*12;             // game-to-game form swing
-  const edge=(teamOvr-opp)*.62;                 // skill difference favors good drafts a bit more
-  const my=Math.max(8,Math.round(22+edge*.35+home+form*.4+Math.random()*8));
-  const th=Math.max(6,Math.round(22-edge*.3+form*-.25+Math.random()*8));
-  let a=my,b=th;
-  if(a===b){Math.random()<.5+(teamOvr-opp)/50?a++:b++}
-  // Cap absurd blowouts a bit
-  if(a-b>35)a=b+28+Math.floor(Math.random()*8);
-  if(b-a>35)b=a+28+Math.floor(Math.random()*8);
-  return{my:a,th:b,win:a>b}
+  // Win probability is a logistic curve on the rating gap, so 85-95 OVR teams are
+  // genuinely competitive instead of falling off a cliff. The score is then built
+  // to match the result, so the displayed score and the W/L flag always agree.
+  const opp=base+(Math.random()*8-4);               // opponent strength: base +/- 4
+  const home=Math.random()>.45?1.5:-0.5;            // home-field edge, in rating points
+  const gap=teamOvr+home-opp;
+  const p=1/(1+Math.exp(-gap/SIM_SCALE));
+  const win=Math.random()<p;
+  // Margin: upsets are usually close; mismatches (either way) can get lopsided.
+  const edge=Math.min(14,Math.abs(gap)*.22);
+  const fav=win===(gap>=0);                          // result went the favourite's way
+  let margin=1+Math.floor(-Math.log(1-Math.random())*(5+(fav?edge:0)));
+  margin=Math.min(margin,32);
+  const total=38+Math.floor(Math.random()*19);       // 38-56 combined points
+  let hi=Math.round((total+margin)/2),lo=hi-margin;
+  if(lo<3){lo=3;hi=lo+margin}
+  return win?{my:hi,th:lo,win:true}:{my:lo,th:hi,win:false};
 }
 
 function runSeason(){
@@ -1380,7 +1640,7 @@ function runSeason(){
 function doPlayoffs(ovr,regW){
   const area=document.getElementById("playoff-area");area.classList.remove("hidden");
   let html=`<div class="po-box"><h3>Playoffs</h3>`,cup=false;
-  const semi=sim(ovr,BASE+7);
+  const semi=sim(ovr,BASE+POFF_SEMI);
   html+=`<div class="grow po ${semi.win?"w":"l"}"><span>Semi-Final</span><span>${semi.my}–${semi.th} ${semi.win?"W":"L"}</span></div>`;
   if(!semi.win){
     html+=`<p style="margin-top:.6rem;font-size:.88rem;color:var(--muted)">Eliminated.</p></div>`;
@@ -1388,7 +1648,7 @@ function doPlayoffs(ovr,regW){
     if(lastRun){lastRun.cup=false;if(daily)submitDailyScore(lastRun);recordCareerSeason(lastRun)}
     return;
   }
-  const gc=sim(ovr,BASE+10.5);
+  const gc=sim(ovr,BASE+POFF_FINAL);
   html+=`<div class="grow po ${gc.win?"w":"l"}"><span>Dominion Cup</span><span>${gc.my}–${gc.th} ${gc.win?"W":"L"}</span></div>`;
   if(gc.win){
     cup=true;
@@ -1470,22 +1730,25 @@ function buildRecap(w,l,pf,pa,games){
 function showPlayerDetail(id){
   const p=PL.find(x=>x.id===id);if(!p)return;
   sfxClick();
-  const note=TEAM_NOTES[p.teams[0]]||"";
+  const hardOn=document.body.classList.contains("hard"),tier=tierOf(p.ovr);
+  const entries=nameEntries(p.name).slice().sort((a,b)=>a.era.localeCompare(b.era)||(b.ovr-a.ovr));
+  const career=entries.map(q=>(q.teams||[]).map(t=>`<button type="button" class="pd-career" data-team="${esc(t)}"><span>${esc(t)}</span><span>${q.era} · ${q.pos}${hardOn?"":" · "+q.ovr}</span></button>`).join("")).join("");
+  const teams=[...new Set(entries.flatMap(q=>q.teams||[]))];
+  const notes=teams.filter(t=>TEAM_NOTES[t]).map(t=>`<details class="pd-team"><summary>${esc(t)} — history</summary><p>${esc(TEAM_NOTES[t])}</p></details>`).join("");
   const html=`
     <div class="pd-head">
       ${typeof crest==="function"?crest(p.teams[0],42):""}
       <div>
-        <div class="pd-name">${p.name}</div>
+        <div class="pd-name">${esc(p.name)}</div>
         <div class="pd-meta">${p.pos} · ${p.era}</div>
       </div>
     </div>
-    <div class="pd-row"><span class="pd-label">Overall</span><span class="pd-val" style="color:var(--green)">${p.ovr}</span></div>
+    ${hardOn?"":`<div class="pd-row"><span class="pd-label">Overall</span><span class="pd-val" style="color:var(--green)">${p.ovr} <span class="tier t-${tier.k}">${tier.t}</span></span></div>`}
     <div class="pd-row"><span class="pd-label">Position</span><span class="pd-val">${p.pos}</span></div>
-    <div class="pd-row"><span class="pd-label">Era</span><span class="pd-val">${p.era}</span></div>
-    <div class="pd-row"><span class="pd-label">Team(s)</span><span class="pd-val">${p.teams.join(", ")}</span></div>
-    <p style="margin-top:.8rem"><a class="btn-g" href="cfl-database.html#${encodeURIComponent(p.name)}" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Open full database</a></p>
-    ${note?`<div class="pd-note">${note}</div>`:""}
-    <p style="margin-top:.8rem;font-size:.75rem;color:var(--muted)">Tap a player card to view · Click “Use” area or close to return</p>`;
+    <div class="pd-label" style="margin:.8rem 0 .3rem">Career in this game <small>(tap a team for its history)</small></div>
+    <div class="pd-careerlist">${career}</div>
+    ${notes?`<div style="margin-top:.7rem">${notes}</div>`:""}
+    <p style="margin-top:.8rem"><a class="btn-g" href="cfl-database.html#${encodeURIComponent(p.name)}" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Open full database</a></p>`;
   document.getElementById("player-detail").innerHTML=html;
   document.getElementById("player-modal").classList.remove("hidden");
 }
@@ -2159,7 +2422,7 @@ function syncReel(){if(!spunTeam)return;const m=[["reel-team",spunTeam,t=>`<div 
 function showSpin(note){syncReel();$("spin-result").textContent=`Round ${rd+1}/12 · ${spunTeam} · ${spunEra}`;$("spin-note").textContent=note||TEAM_NOTES[spunTeam]||"";$("wild-display").textContent=`Redraws · Team ${rdw.t} · Era ${rdw.e}`;$("btn-rd-team").disabled=!myTurn||!rdw.t;$("btn-rd-era").disabled=!myTurn||!rdw.e;renderPlayers()}
 function h2hRound(){
  if(roster.length>=12&&cpu.length>=12)return h2hFinish();
- const tok=h2hTok;rd=roster.length;const L=livePairs(),v=L[Math.floor(_rand()*L.length)];myTurn=false;
+ const tok=h2hTok;rd=roster.length;const L=livePairs(),v=pickPairWeighted(L,_rand);myTurn=false;
  $("spin-result").textContent="Spinning…";$("spin-note").textContent="";$("btn-rd-team").disabled=true;$("btn-rd-era").disabled=true;
  reel(v,()=>{if(tok!==h2hTok)return;spunTeam=v.team;spunEra=v.era;
  if(rd%2===0){myTurn=true;showSpin("You pick first this round")}
@@ -2506,25 +2769,21 @@ function h2hFinish(){
     if(p.era==="1940s"||p.era==="1950s")return"Founding Era";
     return p.ovr>=86?"All-Star":"Contributor";
   };
-  const chemistry=()=>{
-    if(!roster.length)return{score:0,label:"No chemistry yet"};
-    const eras=new Set(roster.map(p=>p.era)).size;
-    const teams=new Set(roster.flatMap(p=>p.teams||[])).size;
-    const traitCounts={};roster.forEach(p=>{const t=traitFor(p);traitCounts[t]=(traitCounts[t]||0)+1});
-    const traitBonus=Object.values(traitCounts).filter(n=>n>=2).length*2;
-    const score=Math.min(8,Math.max(0,(roster.length-1)*.55+Math.max(0,4-eras)*1.1+Math.max(0,4-teams)*.6+traitBonus*.75));
-    return{score,label:score>=9?"Excellent":score>=5?"Balanced":"Developing"};
-  };
+  const chemistry=()=>chemistryBreakdown(roster);
   const addRosterPanel=()=>{
     if(document.getElementById("chemistry-panel"))return;
     const box=document.querySelector(".roster-box");
     if(!box)return;
-    box.insertAdjacentHTML("beforeend",`<div class="exp-panel" id="chemistry-panel"><h3>Team Chemistry</h3><div id="chemistry-value" class="chemistry">Developing · +0</div><p id="chemistry-detail">Build around shared eras, teams, and player traits.</p></div>`);
+    box.insertAdjacentHTML("beforeend",`<div class="exp-panel" id="chemistry-panel"><h3>Team Chemistry</h3><div id="chemistry-value" class="chemistry">Low · +0</div><div id="chemistry-detail">Build around shared eras, franchises, teammates and position units.</div></div>`);
   };
   const updateChemistry=()=>{
-    addRosterPanel();const c=chemistry(),el=document.getElementById("chemistry-value"),detail=document.getElementById("chemistry-detail");
-    if(el)el.textContent=`${c.label} · +${c.score} chemistry`;
-    if(detail)detail.textContent=`${new Set(roster.map(p=>p.era)).size||0} eras · ${new Set(roster.flatMap(p=>p.teams||[])).size||0} franchises · chemistry improves season odds.`;
+    addRosterPanel();const c=chemistry();
+    const el=document.getElementById("chemistry-value"),detail=document.getElementById("chemistry-detail");
+    if(el)el.textContent=`${c.label} · +${c.score.toFixed(1)} chemistry (+${(c.score*.2).toFixed(1)} OVR in the season sim)`;
+    if(detail)detail.innerHTML=chemLines(c);
+    let pill=document.getElementById("chem-pill");const meta=document.querySelector(".draft-h .meta");
+    if(!pill&&meta){pill=document.createElement("div");pill.id="chem-pill";pill.className="chempill";const ovr=document.getElementById("team-ovr");if(ovr)ovr.after(pill);else meta.appendChild(pill)}
+    if(pill)pill.textContent="CHEM +"+c.score.toFixed(1);
   };
   const oldRenderSlots=renderSlots;
   renderSlots=function(){oldRenderSlots();updateChemistry()};
@@ -2540,7 +2799,7 @@ function h2hFinish(){
     });
   };
 
-  const ratingText=`<div class="exp-panel"><h3>How player ratings work</h3><p>Overall ratings are informed estimates using historical reputation, All-Star recognition, production, longevity, position value, and the supplied historical records. They are game-balance ratings, not official CFL grades.</p><p>Quarterbacks receive extra lineup weight. Missing positions and out-of-position players reduce team strength. Chemistry adds a small bonus when your roster shares eras, franchises, or traits.</p></div>`;
+  const ratingText=`<div class="exp-panel"><h3>How player ratings work</h3><p>Overall ratings are informed estimates using historical reputation, All-Star recognition, production, longevity, position value, and the supplied historical records. They are game-balance ratings, not official CFL grades.</p><p>Quarterbacks receive extra lineup weight. Missing positions and out-of-position players reduce team strength. Chemistry adds up to +1.6 OVR in the season sim when your roster shares an era, a franchise, teammates, or position units (like QB + WR from the same decade).</p></div>`;
   const addRatingHelp=()=>{
     if(document.getElementById("rating-help"))return;
     document.querySelector("#hero .tip:last-child")?.insertAdjacentHTML("beforebegin",`<button class="btn-g" id="rating-help" style="margin-top:.6rem">How ratings work</button><div id="rating-help-panel" class="hidden">${ratingText}</div>`);
@@ -2594,10 +2853,20 @@ function h2hFinish(){
   document.body.appendChild(decisionBox);
   const oldSim=sim;
   sim=function(teamOvr,base){
-    const c=chemistry(), adjusted=teamOvr+c.score*.2+seasonDecision.bonus*.35;
+    // Season approach: a small rating bonus for each choice. Aggressive also adds
+    // game-to-game volatility (its tradeoff); both only reshape the score, never
+    // the result, so the W/L flag always matches the scoreboard.
+    const c=chemistry();
+    let adjusted=teamOvr+c.score*.2+seasonDecision.bonus*.35;
+    if(seasonDecision.name==="Aggressive")adjusted+=(Math.random()-.5)*10;
     const g=oldSim(adjusted,base);
-    if(seasonDecision.name==="Aggressive"){g.my+=Math.random()<.25?5:0;g.th+=Math.random()<.18?4:0}
-    if(seasonDecision.name==="Defensive"){g.th=Math.max(3,g.th-(Math.random()<.35?4:1));g.win=g.my>g.th}
+    if(seasonDecision.name==="Aggressive"&&Math.random()<.35){        // higher scoring
+      g.my=g.win?g.my+4:Math.min(g.th-1,g.my+2);
+    }
+    if(seasonDecision.name==="Defensive"){                            // lower opponent scores
+      const cut=Math.random()<.35?4:1;
+      g.th=g.win?Math.max(3,g.th-cut):Math.max(g.my+1,g.th-cut);
+    }
     return g;
   };
   const oldRunSeason=runSeason;
@@ -2617,7 +2886,7 @@ function h2hFinish(){
 
   // Achievements are local and transparent; they reward distinct play styles.
   const achievements=[
-    ["founder","Founders","Draft a 1940s player"],["chemist","Chemist","Finish a season with +8 chemistry"],
+    ["founder","Founders","Draft a 1940s player"],["chemist","Chemist","Finish a season with +6 chemistry"],
     ["perfect","Perfect","Complete an 18-0 regular season"],["champion","Champion","Win the Dominion Cup"],
     ["challenger","Challenger","Complete a named challenge"]
   ];
@@ -2630,7 +2899,7 @@ function h2hFinish(){
   const oldSaveBest=saveBest;
   saveBest=function(w,cup){
     oldSaveBest(w,cup);
-    if(w===18)award("perfect");if(cup)award("champion");if(chemistry().score>=8)award("chemist");
+    if(w===18)award("perfect");if(cup)award("champion");if(chemistry().score>=6)award("chemist");
     if(selectedChallenge!=="classic")award("challenger");
     if(roster.some(p=>p.era==="1940s"))award("founder");
   };
@@ -2808,6 +3077,213 @@ if(window.__cflEnhancedRunSeason){
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",wireLogoHome);
   else wireLogoHome();
 })();
+</script>
+<script>
+/* Season extras: awards, rarity, history achievements, streaks, local-midnight daily, emoji share.
+   Isolated in its own block so a failure here can never break the game. */
+(function(){try{
+const LS=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}};
+const SV=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const pad=n=>String(n).padStart(2,"0");
+const dk=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const localKey=()=>dk(new Date());
+// Daily now rolls over at local midnight instead of UTC.
+todayKey=localKey;
+applyRng=function(){Math.random=daily?mb(Number(localKey().replace(/-/g,""))):_rand};
+
+function bumpStreak(){
+  const s=LS("cfl18_streak",{last:"",count:0,best:0}),t=localKey();
+  if(s.last===t)return s;
+  const y=new Date();y.setDate(y.getDate()-1);
+  s.count=s.last===dk(y)?s.count+1:1;s.best=Math.max(s.best,s.count);s.last=t;SV("cfl18_streak",s);return s;
+}
+const EXP=["Baltimore Stallions","Baltimore CFL Colts","Sacramento Gold Miners","San Antonio Texans","Las Vegas Posse","Shreveport Pirates","Memphis Mad Dogs","Birmingham Barracudas"];
+const top=(arr,f)=>{const c={};arr.forEach(p=>f(p).forEach(k=>{c[k]=(c[k]||0)+1}));let b=["",0];for(const k in c)if(c[k]>b[1])b=[k,c[k]];return b};
+const HIST=[
+  ["fullline","Full Lineup","8+ players from one franchise and decade",r=>top(r,p=>(p.teams||[]).map(t=>t+" "+p.era))[1]>=8],
+  ["rrreunion","Rough Riders Reunion","6+ players from the Ottawa Rough Riders",r=>r.filter(p=>(p.teams||[]).includes("Ottawa Rough Riders")).length>=6],
+  ["decadedyn","Decade Dynasty","9+ players from a single decade",r=>top(r,p=>[p.era])[1]>=9],
+  ["timetrav","Time Traveler","Players from 7 or more different decades",r=>new Set(r.map(p=>p.era)).size>=7],
+  ["expansion","Expansion Era","3+ players from 1990s U.S. expansion teams",r=>r.filter(p=>(p.teams||[]).some(t=>EXP.includes(t))).length>=3]
+];
+const sorted={};
+const pct=p=>{const a=sorted[p.pos]||(sorted[p.pos]=PL.filter(q=>q.pos===p.pos).map(q=>q.ovr).sort((x,y)=>x-y));
+  let lo=0,hi=a.length;while(lo<hi){const m=(lo+hi)>>1;if(a[m]<p.ovr)lo=m+1;else hi=m}return Math.round(lo/a.length*100)};
+const E=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function extras(w,cup){
+  const r=roster.slice();if(r.length<12)return;
+  const off=r.filter(p=>["QB","RB","WR","OL","K"].includes(p.pos)),def=r.filter(p=>["DL","LB","DB"].includes(p.pos));
+  const best=a=>a.slice().sort((x,y)=>(y.ovr+(y.pos==="QB"?3:0))-(x.ovr+(x.pos==="QB"?3:0)))[0];
+  const mvp=best(off),dpoy=best(def);
+  const first=r.filter(p=>p.ovr>=90).sort((a,b)=>b.ovr-a.ovr);
+  const rare=r.map(p=>({p,c:pct(p)})).sort((a,b)=>b.c-a.c)[0];
+  const streak=bumpStreak();
+  const got=LS("cfl18_hist",{}),fresh=[];
+  HIST.forEach(h=>{if(h[3](r)&&!got[h[0]]){got[h[0]]=new Date().toISOString();fresh.push(h[1])}});
+  SV("cfl18_hist",got);fresh.forEach(n=>{try{showToast("Achievement unlocked: "+n)}catch(e){}});
+  const old=document.getElementById("awards-panel");if(old)old.remove();
+  const el=document.createElement("div");el.id="awards-panel";el.className="exp-panel";
+  el.innerHTML=`<h3>Season Awards</h3>
+   <p>🏆 <strong>MVP:</strong> ${E(mvp.name)} (${mvp.pos}, ${mvp.ovr})</p>
+   <p>🛡️ <strong>Top Defender:</strong> ${dpoy?E(dpoy.name)+" ("+dpoy.pos+", "+dpoy.ovr+")":"—"}</p>
+   <p>⭐ <strong>All-CFL (90+):</strong> ${first.length?first.map(p=>E(p.name)+" "+p.pos).join(", "):"No one on your roster rated 90+"}</p>
+   <p>💎 <strong>Rarest pick:</strong> ${E(rare.p.name)} — better than ${rare.c}% of all ${rare.p.pos}s in the game</p>
+   <p>🔥 <strong>Streak:</strong> ${streak.count} day${streak.count>1?"s":""} (best ${streak.best})</p>
+   <h3 style="margin-top:.8rem">History Achievements</h3>`+
+   HIST.map(h=>`<p>${got[h[0]]?"✅":"⬜"} <strong>${h[1]}</strong> — ${h[2]}</p>`).join("");
+  const anchor=document.getElementById("season-recap")||document.getElementById("summary-stats");
+  if(anchor)anchor.insertAdjacentElement("afterend",el);
+  try{
+    const sq={elite:"🟨",star:"🟩",starter:"🟦",depth:"⬜"},ord=["QB","RB","WR","OL","DL","LB","DB","K"];
+    const grid=r.slice().sort((a,b)=>ord.indexOf(a.pos)-ord.indexOf(b.pos)||b.ovr-a.ovr).map(p=>sq[tierOf(p.ovr).k]).join("");
+    lastResult=`🏈 3 Down Dynasty\n${w}-${18-w}${w===18?" ✨ PERFECT":""}${cup?" 🏆 Dominion Cup":""}\n${grid}\n⚡ Chem +${chemistryBreakdown(r).score.toFixed(1)}${daily?" · Daily":""} · 🔥 ${streak.count}-day streak\n${location.origin+location.pathname}`;
+  }catch(e){}
+}
+const prev=saveBest;
+saveBest=function(w,cup){prev.apply(this,arguments);try{extras(w,cup)}catch(e){}};
+}catch(e){console.warn("season extras unavailable",e)}})();
+</script>
+<script>
+/* League layer: standings, schedule, H2H, bracket, box scores, watch mode, injuries,
+   weekly challenge, run modifiers + unlocks. Isolated: a failure here cannot break the game. */
+(function(){try{
+const LS=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}};
+const SV=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const E=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const RIV=["BC Lions","Calgary Stampeders","Edmonton Elks","Hamilton Tiger-Cats","Montreal Alouettes","Ottawa Redblacks","Saskatchewan Roughriders","Toronto Argonauts","Winnipeg Blue Bombers"];
+const ME="Your Dynasty";
+const st=document.createElement("style");
+st.textContent=".lg-t{width:100%;border-collapse:collapse;font-size:.78rem}.lg-t td,.lg-t th{padding:.3rem .35rem;text-align:left;border-bottom:1px solid var(--border)}.lg-t .me{color:var(--gold);font-weight:700}.lg-t .q{color:var(--green)}.lg-g{margin:.25rem 0;font-size:.8rem}.lg-g summary{cursor:pointer}.lg-g.w summary{color:var(--green)}.lg-g.l summary{color:var(--red)}.lg-bx{padding:.4rem .2rem;color:var(--muted);font-size:.75rem}.lg-br{display:grid;gap:.4rem;font-size:.8rem}.lg-br div{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:.4rem .6rem}.lg-mod{display:block;font-size:.8rem;margin:.25rem 0}.lg-wk{font-size:.78rem;color:var(--gold);margin:.4rem 0}";
+document.head.appendChild(st);
+
+/* ---------- run modifiers, unlocks, injuries & fatigue ---------- */
+const MODS=[["injuries","Injuries & fatigue","Random injuries and late-season fatigue",0],["underdog","Underdog","Team rating −3 all season",40],["curse","Grey Cup Curse","Playoff opponents +3",100],["glass","Glass Cannon","+3 rating, double injury rate",200]];
+const TITLES=[[400,"Legend"],[200,"Dynasty"],[100,"Contender"],[40,"Veteran"],[0,"Rookie"]];
+const career=()=>LS("cfl18_career",{pts:0,seasons:0});
+const mods=()=>LS("cfl18_mods",{});
+const title=p=>TITLES.find(t=>p>=t[0])[1];
+function modsUI(){
+  const btn=document.getElementById("btn-sim");if(!btn||document.getElementById("mods-box"))return;
+  const c=career(),m=mods(),el=document.createElement("details");el.id="mods-box";el.className="lg-g";
+  el.innerHTML=`<summary>Run modifiers · ${title(c.pts)} · ${c.pts} Dynasty Points</summary>`+MODS.map(x=>{
+    const lock=c.pts<x[3];
+    return `<label class="lg-mod"><input type="checkbox" data-m="${x[0]}" ${m[x[0]]&&!lock?"checked":""} ${lock?"disabled":""}> <strong>${x[1]}</strong> — ${x[2]} ${lock?"🔒 unlocks at "+x[3]+" pts":"(+0.5× points)"}</label>`}).join("");
+  el.addEventListener("change",e=>{const k=e.target.dataset&&e.target.dataset.m;if(!k)return;const n=mods();n[k]=e.target.checked;SV("cfl18_mods",n)});
+  btn.insertAdjacentElement("beforebegin",el);
+}
+let log=[],gameNo=0;
+const prevRun=runSeason;
+runSeason=function(){log=[];gameNo=0;return prevRun.apply(this,arguments)};
+const prevSim=sim;
+sim=function(ovr,base){
+  const reg=Math.abs(base-BASE)<.01,m=mods(),glass=!!m.glass,inj=!!m.injuries||glass;
+  if(reg)gameNo++;
+  let o=ovr,out=null,b=base;
+  if(m.underdog)o-=3;if(glass)o+=3;
+  if(!reg&&m.curse)b+=3;
+  if(inj){
+    if(roster.length&&Math.random()<(glass?.12:.06)){const s=roster[Math.floor(Math.random()*roster.length)];o-=Math.max(0,s.ovr-68)/10;out=s.name}
+    o-=(reg?gameNo:18)*.07;
+  }
+  const g=prevSim(o,b);log.push({my:g.my,th:g.th,win:g.win,reg,n:reg?gameNo:0,out});return g;
+};
+
+/* ---------- box scores & key plays ---------- */
+const mk=s=>{let a=s>>>0;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};
+const pickPos=(r,rnd,...ps)=>{const a=roster.filter(p=>ps.includes(p.pos));return a.length?a[Math.floor(rnd()*a.length)].name:"Your offense"};
+function plays(g,opp,seed){
+  const rnd=mk(seed),ev=[];
+  const score=(total,side)=>{let r=total;while(r>0){let pts=r>=7&&rnd()<.7?7:r>=3?3:r===2?2:1;r-=pts;
+    const y=Math.floor(3+rnd()*48);let text;
+    if(side==="me"){text=pts===7?(rnd()<.6?`${pickPos(0,rnd,"QB")} finds ${pickPos(0,rnd,"WR","RB")} for a ${y}-yard touchdown`:`${pickPos(0,rnd,"RB")} powers in from ${Math.min(y,15)} yards out`):pts===3?`${pickPos(0,rnd,"K")} splits the uprights from ${y}`:pts===2?`${pickPos(0,rnd,"DL","LB")} sacks in the end zone for a safety`:`${pickPos(0,rnd,"K")} kicks a rouge (single)`}
+    else text=pts===7?`${opp} answer with a ${y}-yard touchdown`:pts===3?`${opp} kick a ${y}-yard field goal`:pts===2?`${opp} take a safety`:`${opp} score a rouge`;
+    ev.push({q:1+Math.floor(rnd()*4),side,pts,text})}};
+  score(g.my,"me");score(g.th,"opp");
+  if(g.my>=g.th&&rnd()<.5)ev.push({q:1+Math.floor(rnd()*4),side:"me",pts:0,text:`${pickPos(0,rnd,"DB")} comes down with a big interception`});
+  ev.sort((a,b)=>a.q-b.q);
+  const qs={me:[0,0,0,0],opp:[0,0,0,0]};ev.forEach(e=>{if(e.pts)qs[e.side==="me"?"me":"opp"][e.q-1]+=e.pts});
+  return{ev,qs};
+}
+function boxHTML(g,opp,seed){
+  const p=plays(g,opp,seed);let a=0,b=0;
+  const rows=p.ev.map(e=>{if(e.pts){if(e.side==="me")a+=e.pts;else b+=e.pts}return `<div>Q${e.q} · ${E(e.text)}${e.pts?` <em>(${a}-${b})</em>`:""}</div>`}).join("");
+  return `<div class="lg-bx"><table class="lg-t"><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>F</th></tr><tr><td class="me">You</td>${p.qs.me.map(x=>`<td>${x}</td>`).join("")}<td><strong>${g.my}</strong></td></tr><tr><td>${E(opp)}</td>${p.qs.opp.map(x=>`<td>${x}</td>`).join("")}<td><strong>${g.th}</strong></td></tr></table>${g.out?`<div>🩹 Out: ${E(g.out)}</div>`:""}<div style="margin-top:.3rem">${rows}</div></div>`;
+}
+function watch(host,g,opp,seed){
+  const p=plays(g,opp,seed);let a=0,b=0,i=0;host.innerHTML=`<div class="lg-bx"><strong>${E(opp)} vs You</strong> · live</div>`;
+  const t=setInterval(()=>{
+    if(i>=p.ev.length){clearInterval(t);host.insertAdjacentHTML("beforeend",`<div class="lg-bx"><strong>FINAL: You ${g.my} – ${g.th} ${E(opp)} ${g.win?"✅":"❌"}</strong></div>`);return}
+    const e=p.ev[i++];if(e.pts){if(e.side==="me")a+=e.pts;else b+=e.pts}
+    host.insertAdjacentHTML("beforeend",`<div class="lg-bx">Q${e.q} · ${E(e.text)}${e.pts?` — <strong>${a}-${b}</strong>`:""}</div>`);
+  },1100);
+}
+
+/* ---------- weekly challenge ---------- */
+const topC=(r,f)=>{const c={};r.forEach(p=>f(p).forEach(k=>{c[k]=(c[k]||0)+1}));return Math.max(0,...Object.values(c))};
+const avg=a=>a.length?a.reduce((s,p)=>s+p.ovr,0)/a.length:0;
+const WK=[
+ ["Seventies Week","Draft 6+ players from the 1970s",r=>r.filter(p=>p.era==="1970s").length>=6],
+ ["Trench Week","OL and DL average 88+",r=>avg(r.filter(p=>p.pos==="OL"||p.pos==="DL"))>=88],
+ ["Quarterback Week","Draft a 95+ QB and win 14+ games",(r,w)=>r.some(p=>p.pos==="QB"&&p.ovr>=95)&&w>=14],
+ ["Time Traveler Week","Players from 6+ different decades",r=>new Set(r.map(p=>p.era)).size>=6],
+ ["Franchise Week","6+ players from one franchise",r=>topC(r,p=>p.teams||[])>=6],
+ ["Chemistry Week","Finish with +5 chemistry",r=>chemistryBreakdown(r).score>=5],
+ ["Ironman Week","Win 15+ games",(r,w)=>w>=15],
+ ["Giant Killer Week","Win the Dominion Cup",(r,w,c)=>!!c]
+];
+const wkIdx=Math.floor((Date.now()-new Date(2024,0,1).getTime())/(7*864e5));
+const WKC=WK[((wkIdx%WK.length)+WK.length)%WK.length];
+const banner=()=>{const h=document.querySelector(".draft-h");if(!h||document.getElementById("wk-banner"))return;
+  h.insertAdjacentHTML("afterend",`<div id="wk-banner" class="lg-wk">📅 Weekly challenge · <strong>${WKC[0]}</strong>: ${WKC[1]}</div>`)};
+
+/* ---------- end of season: standings, schedule, H2H, bracket ---------- */
+function league(w,cup){
+  const reg=log.filter(g=>g.reg).slice(0,18),po=log.filter(g=>!g.reg);
+  if(reg.length<18)return;
+  const rate=Math.round(teamRating()),teams=RIV.map(n=>({n,r:Math.round(74+Math.random()*16),w:0,h:0,l:0}));
+  const h2h={};teams.forEach(t=>h2h[t.n]={w:0,l:0});
+  const sched=reg.map((g,i)=>{const o=teams[i%9];if(g.win){h2h[o.n].w++}else{h2h[o.n].l++;o.w++}return{g,o,home:i%2===0}});
+  teams.forEach(t=>{for(let i=0;i<16;i++)if(Math.random()<1/(1+Math.exp(-(t.r-83)/7)))t.w++});
+  const all=[{n:ME,r:rate,w,me:1},...teams].sort((a,b)=>b.w-a.w||b.r-a.r);
+  const field=all.filter(t=>!t.me||w>=14).slice(0,4);
+  const sim1=(a,b)=>Math.random()<1/(1+Math.exp(-(a.r-b.r)/7))?a:b;
+  const duel=(a,b,idx)=>{const meIn=a.me||b.me;if(!meIn)return sim1(a,b);const g=po[idx];const meWin=g?g.win:(idx===1?!!cup:true);return meWin?(a.me?a:b):(a.me?b:a)};
+  const s1=duel(field[0],field[3],0),s2=duel(field[1],field[2],field[0].me||field[3].me?0:(field[1].me||field[2].me?0:0));
+  let champ=null;if(field.length===4){const fin=duel(s1,s2,1);champ=fin}
+  const seed=t=>field.indexOf(t)+1,nm=t=>`#${seed(t)} ${E(t.n)}${t.me?" ⭐":""}`;
+  const tbl=`<table class="lg-t"><tr><th>#</th><th>Team</th><th>W-L</th><th>OVR</th></tr>${all.map((t,i)=>`<tr class="${t.me?"me":field.includes(t)?"q":""}"><td>${i+1}</td><td>${E(t.n)}</td><td>${t.w}-${18-t.w}</td><td>${t.r}</td></tr>`).join("")}</table><div class="lg-bx">Green = playoff field (top 4). Rival ratings are estimates.</div>`;
+  const sc=sched.map((s,i)=>`<details class="lg-g ${s.g.win?"w":"l"}"><summary>G${i+1} ${s.home?"vs":"@"} ${E(s.o.n)} · ${s.g.win?"W":"L"} ${s.g.my}-${s.g.th}</summary>${boxHTML(s.g,s.o.n,i*7919+s.g.my*131+s.g.th)}</details>`).join("");
+  const hh=RIV.map(n=>`${E(n)} ${h2h[n].w}-${h2h[n].l}`).join(" · ");
+  const br=field.length===4?`<div class="lg-br"><div>Semi 1: ${nm(field[0])} vs ${nm(field[3])} → <strong>${E(s1.n)}</strong></div><div>Semi 2: ${nm(field[1])} vs ${nm(field[2])} → <strong>${E(s2.n)}</strong></div><div>🏆 Final: <strong>${E(champ.n)}</strong>${champ.me?" — your Dynasty!":""}</div></div>`:"";
+  const all2=[...reg.map((g,i)=>({g,o:sched[i].o.n,i})),...po.map((g,i)=>({g,o:"Playoff opponent",i:100+i}))];
+  const cupG=po[1]?{g:po[1],o:"Cup opponent",i:101}:null;
+  const close=all2.slice().sort((a,b)=>Math.abs(a.g.my-a.g.th)-Math.abs(b.g.my-b.g.th))[0];
+  const pick=cupG||close,wl=cupG?"Watch the Cup game":(w===18?"Watch your closest 18-0 game":"Watch your most dramatic game");
+  const c=career(),act=Object.entries(mods()).filter(e=>e[1]&&MODS.find(x=>x[0]===e[0]&&c.pts>=x[3])).length;
+  const pts=Math.round((w+(cup?10:0)+(w===18?25:0))*(1+.5*act));
+  c.pts+=pts;c.seasons++;SV("cfl18_career",c);
+  const wkDone=WKC[2](roster,w,cup),wkd=LS("cfl18_weekly",{});if(wkDone)wkd[wkIdx]=1;SV("cfl18_weekly",wkd);
+  const el=document.createElement("div");el.id="league-panel";el.className="exp-panel";
+  el.innerHTML=`<h3>League</h3>
+   <p class="lg-wk">📅 ${WKC[0]}: ${WKC[1]} — ${wkDone?"✅ Complete!":"❌ not this time"}</p>
+   <p>💠 +${pts} Dynasty Points (${c.pts} total · ${title(c.pts)}${act?` · ${act} modifier${act>1?"s":""} active`:""})</p>
+   <details class="lg-g" open><summary>Standings</summary>${tbl}</details>
+   ${br?`<details class="lg-g" open><summary>Playoff bracket</summary>${br}</details>`:""}
+   <details class="lg-g"><summary>Schedule & box scores</summary>${sc}</details>
+   <details class="lg-g"><summary>Head-to-head</summary><div class="lg-bx">${hh}</div></details>
+   <p><button type="button" class="btn-g" id="lg-watch">▶ ${wl}</button></p><div id="lg-live"></div>`;
+  const old=document.getElementById("league-panel");if(old)old.remove();
+  const anchor=document.getElementById("awards-panel")||document.getElementById("season-recap")||document.getElementById("summary-stats");
+  if(anchor)anchor.insertAdjacentElement("afterend",el);
+  document.getElementById("lg-watch").onclick=()=>watch(document.getElementById("lg-live"),pick.g,pick.o,pick.i*7919+pick.g.my*131+pick.g.th);
+  modsUI();
+}
+const prev=saveBest;
+saveBest=function(w,cup){prev.apply(this,arguments);try{league(w,cup)}catch(e){console.warn("league",e)}};
+modsUI();banner();
+document.addEventListener("click",()=>{modsUI();banner()});
+}catch(e){console.warn("league layer unavailable",e)}})();
 </script>
 </body>
 </html>
