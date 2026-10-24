@@ -38,6 +38,7 @@ const aliases = new Map([
   ["Montreal Hornets", "Montreal Alouettes"],
   ["Edmonton Eskimos", "Edmonton Eskimos"],
   ["Baltimore Colts", "Baltimore CFL Colts"],
+  ["Ottawa RedBlacks", "Ottawa Redblacks"],
 ]);
 const positions = new Set(["QB", "RB", "WR", "OL", "DL", "LB", "DB", "K"]);
 const badPlayers = new Set(["Bud Grant|1940s|Winnipeg Blue Bombers", "Kenny Ploen|1940s|Winnipeg Blue Bombers"]);
